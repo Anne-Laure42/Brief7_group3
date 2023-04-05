@@ -24,6 +24,11 @@ sudo cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-
 #télécharger l'api secret-key
 sudo wget -O /tmp/wp.keys https://api.wordpress.org/secret-key/1.1/salt/
 
+#pour créer la base de donnée maria db sur azure on'a utilisé la commande :
+#mysql -h group3-mariadb-server-364480898.mariadb.database.azure.com -u thewarriors@group3-mariadb-server-364480898 -p
+#CREATE DATABASE wordpress;
+
+
 #changer le mode d'écriture et d'édition des fichiers
 sudo chmod go+wx /var/www/html/wordpress/wp-config.php
 sudo chmod go+wx /var/www/html/wordpress/wp-config-sample.php
