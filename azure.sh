@@ -3,6 +3,7 @@ az group create -g $group -l francecentral
 username=thewarriors
 password='Azuregroup3brief7@'
 
+#création de vnet
 az network vnet create \
   -n thewarriors \
   -g $group \
@@ -10,12 +11,14 @@ az network vnet create \
   --address-prefixes '192.168.0.0/16' \
   --subnet-name subnet \
   --subnet-prefixes '192.168.1.0/24'
-  
+ 
+#creation d'une availability set 
 az vm availability-set create \
   -n vm-as \
   -l francecentral \
   -g $group
 
+#creation des VM avec un boucle for
 for NUM in 1 2 
 do
   az vm create \
@@ -50,12 +53,14 @@ done
 
 # done
 
+#creation de la clé publique
 az network public-ip create \
     --resource-group brief7_group3 \
     --name PublicIP_group3 \
     --sku Standard \
     --zone 1 2 3
-
+    
+#creation du load balancer
 az network lb create \
     --resource-group brief7_group3 \
     --name LoadBalancer_group3 \
@@ -64,6 +69,7 @@ az network lb create \
     --frontend-ip-name FrontEnd_group3 \
     --backend-pool-name BackEndPool_group3
 
+#creation du health probe
 az network lb probe create \
     --resource-group brief7_group3 \
     --lb-name LoadBalancer_group3 \
@@ -86,10 +92,12 @@ az network lb rule create \
     --idle-timeout 15 \
     --enable-tcp-reset true
 
+#creation du NSG
 az network nsg create \
     --resource-group brief7_group3 \
     --name NSG_group3
 
+#creation des règles Inbound
 az network nsg rule create \
     --resource-group brief7_group3 \
     --nsg-name NSG_group3 \
